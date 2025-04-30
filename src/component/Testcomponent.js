@@ -1,0 +1,71 @@
+import React, { useState } from "react";
+
+function Testcomponent({ data }) {
+  const [currentPage, setCurrentPage] = useState(1); // To track the current page
+  const [itemsPerPage] = useState(10); // Items per page (fixed)
+
+  // Calculate total pages
+  const totalPages = Math.ceil(data.length / itemsPerPage);
+
+  // Determine which items should be shown on the current page
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const paginatedData = data.slice(startIndex, startIndex + itemsPerPage);
+
+  // Handle page change
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+
+  return (
+    <>
+      <div className="container mt-5">
+        <h2 className="text-center mb-4">Products</h2>
+        <table className="table table-bordered">
+          <thead>
+          <tr className="bg-gray-100">
+            <th className="border p-2">Order ID</th>
+            <th className="border p-2">Order Date</th>
+            <th className="border p-2">Customer ID</th>
+            <th className="border p-2">Ship Name</th>
+            <th className="border p-2">City</th>
+            <th className="border p-2">Country</th>
+          </tr>
+          </thead>
+          <tbody>
+          {paginatedData.map((order, index) => (
+            <tr key={index} className="hover:bg-gray-50">
+              <td className="border p-2">{order.orderID}</td>
+              <td className="border p-2">{new Date(order.orderDate).toLocaleDateString()}</td>
+              <td className="border p-2">{order.customerID}</td>
+              <td className="border p-2">{order.shipName}</td>
+              <td className="border p-2">{order.shipCity}</td>
+              <td className="border p-2">{order.shipCountry}</td>
+            </tr>
+          ))}
+          </tbody>
+        </table>
+        {totalPages > 1 && (
+          <div>
+            <button
+              onClick={() => handlePageChange(currentPage - 1)}
+              disabled={currentPage === 1}
+            >
+              Previous
+            </button>
+            <span>
+              Page {currentPage} of {totalPages}
+            </span>
+            <button
+              onClick={() => handlePageChange(currentPage + 1)}
+              disabled={currentPage === totalPages}
+            >
+              Next
+            </button>
+          </div>
+        )}
+      </div>
+    </>
+  );
+}
+
+export default Testcomponent;

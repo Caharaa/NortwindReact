@@ -36,3 +36,33 @@
     transform: rotate(360deg);
   }
 }
+/* Center align header and nav */
+header, nav {
+  text-align: center;
+}
+
+/* Style the navigation */
+nav {
+  display: flex;
+  justify-content: center;
+  gap: 50px; /* Adds space between links */
+  background-color: #f8f9fa; /* Light background */
+  padding: 10px 0; /* Padding above and below */
+}
+
+/* Style navigation links */
+nav a {
+  text-decoration: none;
+  color: #007bff;
+  font-size: 18px;
+  font-weight: bold;
+  padding: 8px 15px;
+  border-radius: 5px;
+}
+
+/* Highlight active link */
+nav a.active {
+  background-color: #007bff;
+  color: white;
+}
+
