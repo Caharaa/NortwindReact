@@ -10,7 +10,7 @@ import {
 } from "recharts";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-function Barchart({data,selectedKpi}) {
+function Barchart({data,selectedKpi,sortOption}) {
   let formattedData = [];
 
   switch (selectedKpi) {
@@ -35,6 +35,20 @@ function Barchart({data,selectedKpi}) {
     default:
       formattedData = [];
   }
+  switch(sortOption)
+  {
+    case "Value":
+      formattedData.sort((a,b)=>{
+        return a.value - b.value;
+      })
+      break;
+      case "Date":
+      formattedData.sort((a,b)=>{
+        return a.group - b.group;
+      })
+      break
+  }
+
   return (
     <>
       <ResponsiveContainer width="100%" height={300}>
