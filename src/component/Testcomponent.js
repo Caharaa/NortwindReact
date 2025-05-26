@@ -2,14 +2,12 @@ import React, { useState } from "react";
 
 function Testcomponent({ data }) {
   const [currentPage, setCurrentPage] = useState(1); // To track the current page
-  const [itemsPerPage] = useState(10); // Items per page (fixed)
+  const pageSize = 10 // Items per page (fixed)
 
-  // Calculate total pages
-  const totalPages = Math.ceil(data.length / itemsPerPage);
 
-  // Determine which items should be shown on the current page
-  const startIndex = (currentPage - 1) * itemsPerPage;
-  const paginatedData = data.slice(startIndex, startIndex + itemsPerPage);
+  const totalPages = Math.ceil(data.length / pageSize);
+  const startIndex = (currentPage - 1) * pageSize;
+  const currentData = data.slice(startIndex, startIndex + pageSize);
 
   // Handle page change
   const handlePageChange = (pageNumber) => {
@@ -32,7 +30,7 @@ function Testcomponent({ data }) {
           </tr>
           </thead>
           <tbody>
-          {paginatedData.map((order, index) => (
+          {currentData.map((order, index) => (
             <tr key={index} className="hover:bg-gray-50">
               <td className="border p-2">{order.orderID}</td>
               <td className="border p-2">{new Date(order.orderDate).toLocaleDateString()}</td>

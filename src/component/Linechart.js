@@ -9,10 +9,10 @@ import {
   CartesianGrid,
 } from "recharts";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { formToJSON } from "axios";
 
-function Linechart({ data ,selectedKpi}) {
+function Linechart({ data,selectedKpi,sortOption}) {
   let formattedData = [];
-
   switch (selectedKpi) {
     case "Total Sales":
       formattedData = data.map((d) => ({
@@ -35,8 +35,19 @@ function Linechart({ data ,selectedKpi}) {
     default:
       formattedData = [];
   }
-  console.log(formattedData)
-
+  switch(sortOption){
+    case "Value":
+      formattedData.sort((a,b) =>{
+        return a.value - b.value;
+      })
+      break;
+    case "Date":
+      formattedData.sort((a,b) =>{
+        return new Date(a.group) - new Date(b.group);
+      })
+      break;
+  }
+  console.log(formattedData);
   return (
     <ResponsiveContainer width="100%" height={300}>
       <LineChart data={formattedData}>

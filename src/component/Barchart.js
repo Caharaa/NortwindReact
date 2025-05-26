@@ -44,10 +44,11 @@ function Barchart({data,selectedKpi,sortOption}) {
       break;
       case "Date":
       formattedData.sort((a,b)=>{
-        return a.group - b.group;
+        return new Date(a.group) - new Date(b.group);
       })
       break
   }
+  console.log(formattedData);
 
   return (
     <>

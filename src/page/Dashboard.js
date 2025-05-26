@@ -4,16 +4,22 @@ import Barchart from "../component/Barchart";
 import Linechart from "../component/Linechart";
 import Piechart from "../component/Piechart";
 import axios from "axios";
+
 function Dashboard() {
   // array of object used for this props charts component
   const [factOverview, setfactOverview] = useState([]);
   const [selectedKpi, setSelectedKpi] = useState("Total Sales");
   const [dateGroup,setdateGroup] = useState("Year");
   const [sortOption,setsortOption] = useState("Date");
+  const token = localStorage.getItem("token")
   useEffect(() => {
     axios
       .get(`http://localhost:5047/api/SalesOverview/${selectedKpi}`,{
-        params:{dateGroup}
+        params:{dateGroup},headers: {
+    Authorization: `Bearer ${token}`,
+    "Content-Type": "application/json"
+  }
+
       })
       .then((response) => {
         setfactOverview(response.data);
@@ -70,15 +76,16 @@ function Dashboard() {
     </select>
   </div>
 
-  <h2 className="mb-4 text-center text-xl font-semibold text-gray-800">
-    {selectedKpi}
-  </h2>
+  <div>
+  {(factOverview.length === 0) ?  <h3 className="mb-4 text-center text-xl font-semibold text-gray-800">Data Is Empty</h3>
+  :<h3 className="mb-4 text-center text-xl font-semibold text-gray-800">{selectedKpi}</h3>}
+  </div>
   </section>
   <section className="container mt-4">
   <div className="flex justify-center items-center gap-6 p-4 rounded-lg">
     <Barchart data={factOverview} selectedKpi={selectedKpi} sortOption={sortOption} />
     <Linechart data={factOverview} selectedKpi={selectedKpi} sortOption={sortOption}/>
-    <Piechart data={factOverview} selectedKpi={selectedKpi} sortOption={sortOption}/>
+    <Piechart data={factOverview} selectedKpi={selectedKpi} />
   </div>
 </section>
 

@@ -1,42 +1,21 @@
 import React from "react";
-import { useState } from 'react';
+import { useState} from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-function Producttable({data}) {
- /* const [filteredData, setFilteredData] = useState(data);
-  const [filterText, setFilterText] = useState('');*/
-  
-  const [currentPage,setCurrentPage] = useState(1);
-  const pageSize = 10
+function Producttable({ data }) {
+  const [currentPage, setCurrentPage] = useState(1);
+  const pageSize = 10;
 
-  const totalPages = Math.ceil(data.length/pageSize)
-  const currentData = data.slice(
-    (currentPage-1)*pageSize,
-    currentPage*pageSize
-  )
-  const handlePageChange = (page) => {
-    setCurrentPage(page);
-  };
-  const handleFilterChange = (event) => {
-    const text = event.target.value;
-    setFilterText(text);
+  const totalPages = Math.ceil(data.length / pageSize);
+  const startIndex = (currentPage - 1) * pageSize;
+  const currentData = data.slice(startIndex, currentPage * pageSize);
 
-    const filtered = data.filter((item) => {
-      return (
-        item.name.toLowerCase().includes(text.toLowerCase())
-      );
-    });
-    setFilteredData(filtered);
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+    console.log(pageNumber);
   };
-  /*<input
-        type="text"
-        placeholder="Filter..."
-        value={filterText}
-        onChange={handleFilterChange}
-      />*/
   return (
-    <>    
+    <>
       <div className="container mt-5">
-      
         <h2 className="text-center mb-4">Products</h2>
         <table className="table table-bordered">
           <thead>
@@ -59,24 +38,24 @@ function Producttable({data}) {
           </tbody>
         </table>
         {totalPages > 1 && (
-        <div>
-          <button
-            onClick={() => handlePageChange(currentPage - 1)}
-            disabled={currentPage === 1}
-          >
-            Previous
-          </button>
-          <span>
-            Page {currentPage} of {totalPages}
-          </span>
-          <button
-            onClick={() => handlePageChange(currentPage + 1)}
-            disabled={currentPage === totalPages}
-          >
-            Next
-          </button>
-        </div>
-      )}
+          <div>
+            <button
+              onClick={() => handlePageChange(currentPage - 1)}
+              disabled={currentPage === 1}
+            >
+              Previous
+            </button>
+            <span>
+              Page {currentPage} of {totalPages}
+            </span>
+            <button
+              onClick={() => handlePageChange(currentPage + 1)}
+              disabled={currentPage === totalPages}
+            >
+              Next
+            </button>
+          </div>
+        )}
       </div>
     </>
   );
