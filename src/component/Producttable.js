@@ -1,13 +1,15 @@
 import React from "react";
-import { useState} from "react";
+import { useState,useContext} from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-function Producttable({ data }) {
+import { InventoryContext } from '../context/InventoryProvider';
+function Producttable() {
+  const {products} = useContext(InventoryContext)
   const [currentPage, setCurrentPage] = useState(1);
   const pageSize = 10;
 
-  const totalPages = Math.ceil(data.length / pageSize);
+  const totalPages = Math.ceil(products.length / pageSize);
   const startIndex = (currentPage - 1) * pageSize;
-  const currentData = data.slice(startIndex, currentPage * pageSize);
+  const currentData = products.slice(startIndex, currentPage * pageSize);
 
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);

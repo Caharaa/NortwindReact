@@ -1,13 +1,14 @@
-import React, { useState } from "react";
-
-function Testcomponent({ data }) {
+import React, { useState ,useContext} from "react";
+import { OrderContext } from "../context/OrderProvider";
+function Testcomponent() {
+  const {order} = useContext(OrderContext)
+  console.log(`${order} is form context`)
   const [currentPage, setCurrentPage] = useState(1); // To track the current page
   const pageSize = 10 // Items per page (fixed)
 
-
-  const totalPages = Math.ceil(data.length / pageSize);
+  const totalPages = Math.ceil(order.length / pageSize);
   const startIndex = (currentPage - 1) * pageSize;
-  const currentData = data.slice(startIndex, startIndex + pageSize);
+  const currentData = order.slice(startIndex, startIndex + pageSize);
 
   // Handle page change
   const handlePageChange = (pageNumber) => {

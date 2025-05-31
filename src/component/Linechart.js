@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
   LineChart,
   Line,
@@ -10,24 +10,26 @@ import {
 } from "recharts";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { formToJSON } from "axios";
+import { FactContext } from "../context/FactProvider";
 
-function Linechart({ data,selectedKpi,sortOption}) {
+function Linechart() {
+  const {factOverview,selectedKpi,sortOption} = useContext(FactContext)
   let formattedData = [];
   switch (selectedKpi) {
     case "Total Sales":
-      formattedData = data.map((d) => ({
+      formattedData = factOverview.map((d) => ({
         group: d.salerDate,
         value: d.saleOverview,
       }));
       break;
     case "Avg Order":
-      formattedData = data.map((d) => ({
+      formattedData = factOverview.map((d) => ({
         group: d.orderyear,
         value: d.avgOrderValue,
       }));
       break;
     case "revenue-by-category":
-      formattedData = data.map((d) => ({
+      formattedData = factOverview.map((d) => ({
         group: d.categoryName,
         value: d.revenue,
       }));

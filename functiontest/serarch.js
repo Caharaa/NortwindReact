@@ -29,4 +29,3 @@ const result2 = lowersearch("Thailand",orders);
 console.log(`algor 1 ${result1.length} algor 2 ${result2.length}`);
 const cash = new obj();
 cash.set("1264","hellow world!");
-console.log(cash.get("1264"));

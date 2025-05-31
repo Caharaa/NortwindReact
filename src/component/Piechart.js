@@ -1,4 +1,5 @@
-import React from "react";
+
+import React,{useContext} from "react";
 import {
   PieChart,
   Pie,
@@ -7,27 +8,28 @@ import {
   ResponsiveContainer,
   Legend,
 } from "recharts";
-
+import { FactContext } from "../context/FactProvider";
 const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042", "#A28DFF"];
 
-function Piechart({ data, selectedKpi }) {
+function Piechart() {
+  const {factOverview,selectedKpi} = useContext(FactContext)
   let formattedData = [];
 
   switch (selectedKpi) {
     case "Total Sales":
-      formattedData = data.map((d) => ({
+      formattedData = factOverview.map((d) => ({
         group: d.salerDate, // check this field
         value: d.saleOverview,
       }));
       break;
     case "Avg Order":
-      formattedData = data.map((d) => ({
+      formattedData = factOverview.map((d) => ({
         group: d.orderyear,
         value: d.avgOrderValue,
       }));
       break;
     case "revenue-by-category":
-      formattedData = data.map((d) => ({
+      formattedData = factOverview.map((d) => ({
         group: d.categoryName,
         value: d.revenue,
       }));

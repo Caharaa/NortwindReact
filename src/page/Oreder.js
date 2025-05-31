@@ -1,16 +1,17 @@
-import React,{useState,useEffect}from 'react'
-import Ordertable from '../component/Ordertable'
+import React,{useEffect,useContext}from 'react'
 import Testcomponent from '../component/Testcomponent';
+import { OrderContext } from '../context/OrderProvider';
 import axios from 'axios';
+
 function Oreder() {
-  const [order,setorder] = useState([]);
+  const {setOrder} = useContext(OrderContext);
   const token = localStorage.getItem("token");
   useEffect(() => {
     axios.get('http://localhost:5047/api/Orders/Orderlist',{ headers: {
     Authorization: `Bearer ${token}`,
     "Content-Type": "application/json"}})
     .then(response => {
-      setorder(response.data);
+      setOrder(response.data);
       console.log("fetch successfully: ", response.data); // Log the response data directly
     })
     .catch(error => {
@@ -20,7 +21,7 @@ function Oreder() {
   
   return (
     <>
-    <Testcomponent data={order}></Testcomponent>
+    <Testcomponent></Testcomponent>
     </>
   )
 }

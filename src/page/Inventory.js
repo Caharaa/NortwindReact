@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useContext} from 'react';
 import axios from 'axios';
 import Producttable from '../component/Producttable';
+import { InventoryContext } from '../context/InventoryProvider';
 
 function Inventory() {
-  const [products, setProducts] = useState([]);
+  const {setproducts} = useContext(InventoryContext)
   const token = localStorage.getItem("token");
   useEffect(() => {
     axios.get('http://localhost:5047/api/Products',{
@@ -12,7 +13,7 @@ function Inventory() {
     "Content-Type": "application/json"}
     })
       .then(response => {
-        setProducts(response.data);
+        setproducts(response.data);
         console.log("fetch successfully: ", response.data); // Log the response data directly
       })
       .catch(error => {
@@ -24,7 +25,7 @@ function Inventory() {
 
   return (
     <div className="container mt-4">
-    <Producttable data={products}></Producttable>
+      <Producttable></Producttable>
     </div>
   );
 }

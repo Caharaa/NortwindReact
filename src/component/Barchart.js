@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useContext} from "react";
 import {
   BarChart,
   Bar,
@@ -9,25 +9,26 @@ import {
   CartesianGrid,
 } from "recharts";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { FactContext } from "../context/FactProvider";
 
-function Barchart({data,selectedKpi,sortOption}) {
+function Barchart() {
+    const {selectedKpi,sortOption,factOverview} = useContext(FactContext)
   let formattedData = [];
-
   switch (selectedKpi) {
     case "Total Sales":
-      formattedData = data.map((d) => ({
+      formattedData = factOverview.map((d) => ({
         group: d.salerDate, // check this field
         value: d.saleOverview,
       }));
       break;
     case "Avg Order":
-      formattedData = data.map((d) => ({
+      formattedData = factOverview.map((d) => ({
         group: d.orderyear,
         value: d.avgOrderValue,
       }));
       break;
     case "revenue-by-category":
-      formattedData = data.map((d) => ({
+      formattedData = factOverview.map((d) => ({
         group: d.categoryName,
         value: d.revenue,
       }));

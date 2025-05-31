@@ -1,16 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect ,useContext} from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Barchart from "../component/Barchart";
 import Linechart from "../component/Linechart";
 import Piechart from "../component/Piechart";
 import axios from "axios";
-
+import { FactContext } from "../context/FactProvider";
 function Dashboard() {
   // array of object used for this props charts component
-  const [factOverview, setfactOverview] = useState([]);
-  const [selectedKpi, setSelectedKpi] = useState("Total Sales");
-  const [dateGroup,setdateGroup] = useState("Year");
-  const [sortOption,setsortOption] = useState("Date");
+  const {factOverview,selectedKpi,dateGroup,setfactOverview,setSelectedKpi,setdateGroup,sortOption,setsortOption} = useContext(FactContext)
   const token = localStorage.getItem("token")
   useEffect(() => {
     axios
@@ -83,9 +80,9 @@ function Dashboard() {
   </section>
   <section className="container mt-4">
   <div className="flex justify-center items-center gap-6 p-4 rounded-lg">
-    <Barchart data={factOverview} selectedKpi={selectedKpi} sortOption={sortOption} />
-    <Linechart data={factOverview} selectedKpi={selectedKpi} sortOption={sortOption}/>
-    <Piechart data={factOverview} selectedKpi={selectedKpi} />
+    <Barchart  />
+    <Linechart />
+    <Piechart  />
   </div>
 </section>
 
