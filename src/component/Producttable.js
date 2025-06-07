@@ -22,10 +22,10 @@ function Producttable() {
         <table className="table table-bordered">
           <thead>
             <tr>
-              <th>productID</th>
-              <th>productName</th>
-              <th>unitsInStock</th>
-              <th>unitsOnOrder</th>
+              <th>ProductID</th>
+              <th>ProductName</th>
+              <th>UnitsInStock</th>
+              <th>UnitsOnOrder</th>
             </tr>
           </thead>
           <tbody>
