@@ -4,7 +4,7 @@ import Producttable from '../component/Producttable';
 import { InventoryContext } from '../context/InventoryProvider';
 
 function Inventory() {
-  const {setproducts} = useContext(InventoryContext)
+  const {products,setproducts} = useContext(InventoryContext)
   const token = localStorage.getItem("token");
   useEffect(() => {
     axios.get('http://localhost:5047/api/Products',{
