@@ -5,12 +5,12 @@ import Linechart from "../component/Linechart";
 import Piechart from "../component/Piechart";
 import axios from "axios";
 import { FactContext } from "../context/FactProvider";
+import { redirect } from "react-router-dom";
 function Dashboard() {
   // array of object used for this props charts component
   const {factOverview,selectedKpi,dateGroup,setfactOverview,setSelectedKpi,setdateGroup,sortOption,setsortOption} = useContext(FactContext)
   const token = localStorage.getItem("token")
-  useEffect(() => {
-    axios
+  useEffect(() => { axios
       .get(`http://localhost:5047/api/SalesOverview/${selectedKpi}`,{
         params:{dateGroup},headers: {
     Authorization: `Bearer ${token}`,
@@ -23,6 +23,7 @@ function Dashboard() {
         console.log("fetch successfully: ", response.data); // Log the response data directly
       })
       .catch((error) => {
+        redirect("/")
         console.log("There was an error fetching the product list:", error);
       });
   }, [selectedKpi,dateGroup]);
