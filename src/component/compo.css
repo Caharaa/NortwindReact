@@ -1,0 +1,99 @@
+/* Styles for the modal-overlay */
+.modal-overlay {
+  /* Position fixed to cover the entire viewport */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* Semi-transparent background */
+  background: rgba(0, 0, 0, 0.7);
+  /* Use flexbox to center the modal content */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* Ensure the overlay is on top of other content */
+  z-index: 1000;
+  /* Smooth transition for appearance */
+  transition: opacity 0.3s ease-in-out;
+  opacity: 1; /* Assume it starts visible if rendered */
+}
+
+/* Styles for the modal content box */
+.modal {
+  background: #ffffff; /* White background for the modal */
+  padding: 30px;
+  border-radius: 12px; /* Rounded corners for a modern look */
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3); /* Soft, deep shadow */
+  width: 90%; /* Responsive width */
+  max-width: 500px; /* Maximum width on larger screens */
+  box-sizing: border-box; /* Include padding in the width calculation */
+  position: relative; /* Needed for positioning the close button */
+  display: flex; /* Use flexbox for internal content alignment */
+  flex-direction: column; /* Stack elements vertically */
+  align-items: center; /* Center items horizontally */
+  text-align: center; /* Center text within the modal */
+  /* Animation for modal entry */
+  animation: slideIn 0.3s ease-out forwards;
+}
+
+/* Keyframes for modal entry animation */
+@keyframes slideIn {
+  from {
+    transform: translateY(-50px) scale(0.9);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+}
+
+
+/* Styles for the modal title */
+.modal h2 {
+  font-family: 'Inter', sans-serif; /* Use Inter font */
+  font-size: 28px; /* Larger title */
+  color: #333; /* Darker text color */
+  margin-top: 0;
+  margin-bottom: 15px;
+}
+
+/* Styles for the modal content paragraph */
+.modal p {
+  font-family: 'Inter', sans-serif; /* Use Inter font */
+  font-size: 16px;
+  color: #555; /* Slightly lighter text color */
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+/* Styles for the close button */
+.close-button {
+  position: absolute;
+  top: 15px; /* Distance from top edge of modal */
+  right: 15px; /* Distance from right edge of modal */
+  background: #e0e0e0; /* Light grey background */
+  color: #333;
+  border: none;
+  border-radius: 50%; /* Make it round */
+  width: 30px; /* Fixed width */
+  height: 30px; /* Fixed height */
+  font-size: 18px; /* Size of the "X" or text */
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+.close-button:hover {
+  background-color: #c0c0c0; /* Darker grey on hover */
+  transform: scale(1.05); /* Slightly enlarge on hover */
+}
+
+.close-button:active {
+  transform: scale(0.95); /* Shrink slightly on click */
+}

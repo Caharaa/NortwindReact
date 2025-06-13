@@ -5,7 +5,6 @@ function Login() {
   const Navigate = useNavigate()
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [isError,setIsError] = useState("")
   const handleSubmit = (e)=>{
      e.preventDefault();
     console.log(`userName${username} password${password}`)
@@ -19,7 +18,6 @@ function Login() {
         Navigate("./Dashboard");
     })).catch(err => {
         console.log(err);
-        setIsLoding()
     })
   }
     return (
